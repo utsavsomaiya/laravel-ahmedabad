@@ -1,7 +1,6 @@
 <?php
 
+use App\Livewire\Demo;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', Demo::class)->name('demo');
