@@ -28,7 +28,7 @@ class Demo extends Component
             return;
         }
 
-        dd('Ab bas kar slide puri ho gyi beta');
+        dd('Ab bas kar slide puri ho gyi beta 😏');
     }
 
     public function prev(): void
