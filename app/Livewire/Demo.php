@@ -13,14 +13,14 @@ class Demo extends Component
 
     public array $titles = [
         'Hey there! Introduction',
+        'Quick Poll!',
     ];
 
     public function next(): void
     {
         if ($this->slide !== 10) {
-            $this->dispatch('update-title', title: 'Next slide please');
-
             $this->slide++;
+            $this->dispatch('update-title', title: $this->titles[$this->slide - 1] ?? 'Oops!');
 
             return;
         }
@@ -31,13 +31,14 @@ class Demo extends Component
     public function prev(): void
     {
         if ($this->slide > 1) {
-            $this->dispatch('update-title', title: 'Prev slide please');
             $this->slide--;
+            $this->dispatch('update-title', title: $this->titles[$this->slide - 1] ?? 'Oops!');
         }
     }
 
     public function render(): View
     {
-        return view('livewire.demo');
+        return view('livewire.demo')
+            ->title($this->titles[$this->slide - 1] ?? 'Oops!');
     }
 }
