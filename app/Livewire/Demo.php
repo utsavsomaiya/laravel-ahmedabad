@@ -14,6 +14,9 @@ class Demo extends Component
     public array $titles = [
         'Hey there! Introduction',
         'Quick Poll!',
+        'What you will learn?',
+        'Rebase v/s Merge',
+        '`git rebase --abort`',
     ];
 
     public function next(): void
