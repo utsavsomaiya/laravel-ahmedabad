@@ -234,5 +234,215 @@
                 </p>
             </div>
         </div>
+    @elseif ($slide === 6)
+        <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex flex-col items-center justify-center py-12">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-8 text-center drop-shadow-lg">
+                Supercharge Your Workflow: Git Aliases
+            </h2>
+
+            <div class="w-full max-w-2xl bg-white/90 rounded-2xl shadow-xl p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-700 mb-4 flex items-center gap-2">
+                    <svg class="size-7 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+                    .gitconfig Aliases for Rebasing
+                </h3>
+                <p class="text-gray-800 text-lg mb-4">
+                    Add these to your <span class="font-mono bg-gray-200 px-2 py-1 rounded">~/.gitconfig</span> for faster commands:
+                </p>
+                <pre class="bg-gray-900 text-green-200 rounded-lg px-4 py-3 text-base font-mono mb-2 overflow-x-auto">
+[alias]
+    lg = log --graph --abbrev-commit --decorate --date=relative --all --pretty=format:'%C(yellow)%h%Creset - %Cgreen%ad%Creset %C(bold magenta)<%an>%Creset %C(auto)%d%Creset %s'
+    last = log -1 HEAD
+    r = rebase
+    ri = rebase -i
+    rs = "!f() { git rebase -i HEAD~$1; }; f"
+    rebase-main = "!git fetch origin main && git rebase origin/main"
+    pf = push --force-with-lease
+    fixup = "!f() { git commit --fixup=$1 && git rebase -i --autosquash $1~1; }; f"
+    squash = "!f() { git rebase -i HEAD~$1; }; f"
+    wip = "!git add -A && git commit -m 'wip'"
+    undo = reset --soft HEAD~1
+    st = stash
+    co = checkout
+    cb = "!git checkout -b"
+    up = "!git pull --rebase origin $(git rev-parse --abbrev-ref HEAD)"
+    sync-main = "!git fetch origin && git rebase origin/main"
+    sync-master = "!git fetch origin && git rebase origin/master"
+                </pre>
+                <p class="text-gray-700 text-base mt-2">
+                    <span class="font-bold">Tip:</span> Now you can run <span class="font-mono bg-gray-200 px-2 py-1 rounded">git rbi HEAD~5</span> or <span class="font-mono bg-gray-200 px-2 py-1 rounded">git squash HEAD~5</span>!
+                </p>
+            </div>
+
+            <p class="text-xl md:text-2xl text-gray-800 text-center max-w-2xl mt-4">
+                <span class="font-bold text-gray-700">Pro Tip:</span> Aliases save time and reduce mistakes. Make your git workflow lightning fast!
+            </p>
+        </div>
+    @elseif ($slide === 7)
+        <div class="min-h-screen bg-gradient-to-br from-fuchsia-100 via-sky-100 to-lime-200 flex flex-col items-center justify-center py-12">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-fuchsia-700 mb-8 text-center drop-shadow-lg">
+                Git Hooks That Save Your Bacon (and Your Repo)
+            </h2>
+
+            <div class="w-full max-w-2xl bg-gradient-to-r from-fuchsia-200 via-sky-100 to-lime-100 rounded-2xl shadow-2xl p-8 mb-8 flex flex-col items-center border-4 border-dashed border-fuchsia-300">
+                <h3 class="text-2xl font-bold text-lime-700 mb-4 flex items-center gap-2">
+                    <svg class="w-7 h-7 text-fuchsia-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+                    Pre-push: "Not Today, <span class='font-mono bg-lime-200 px-2 py-1 rounded'>main</span>!"
+                </h3>
+                <pre class="bg-gray-900 text-fuchsia-200 rounded-lg px-4 py-3 text-base font-mono mb-2 overflow-x-auto">
+#!/bin/sh
+branch="$(git rev-parse --abbrev-ref HEAD)"
+if [ "$branch" = "main" ] || [ "$branch" = "master" ]; then
+    echo "🛑 Whoa there, Code Cowboy! No direct pushes to main/master. Make a PR and earn your merge badge! 🤠"
+    exit 1
+fi
+                </pre>
+                <p class="text-lime-700 text-base mt-2 text-center">
+                    <span class="font-bold">Tip:</span> Drop this in <span class="font-mono bg-lime-200 px-2 py-1 rounded">.git/hooks/pre-push</span> and never be the villain in your team's git history!
+                </p>
+            </div>
+
+            <div class="w-full max-w-2xl bg-gradient-to-r from-lime-200 via-sky-100 to-fuchsia-100 rounded-2xl shadow-2xl p-8 mb-8 flex flex-col items-center border-4 border-dashed border-lime-300">
+                <h3 class="text-2xl font-bold text-fuchsia-700 mb-4 flex items-center gap-2">
+                    <svg class="w-7 h-7 text-lime-400 animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 12H8m4-4v8"/></svg>
+                    Pre-commit: "Tests or Tears, Your Choice!"
+                </h3>
+                <pre class="bg-gray-900 text-lime-200 rounded-lg px-4 py-3 text-base font-mono mb-2 overflow-x-auto">
+#!/bin/sh
+echo "🧪 Running Laravel tests before you commit... fingers crossed! 🤞"
+./vendor/bin/phpunit
+status=$?
+if [ $status -ne 0 ]; then
+    echo "💥 Tests failed! Step away from the keyboard and fix them first. 🚑"
+    exit 1
+fi
+                </pre>
+                <p class="text-fuchsia-700 text-base mt-2 text-center">
+                    <span class="font-bold">Tip:</span> Save yourself from future facepalms! Put this in <span class="font-mono bg-fuchsia-200 px-2 py-1 rounded">.git/hooks/pre-commit</span>.
+                </p>
+            </div>
+
+            <p class="text-xl md:text-2xl text-sky-800 text-center max-w-2xl mt-4 font-bold">
+                <span class="font-bold text-fuchsia-700">Remember:</span> Friends don't let friends push to <span class="underline decoration-wavy decoration-lime-500">main</span> or break the build.<br>
+                <span class="italic text-lime-700">Be a Git Hero, not a Git Horror Story!</span> 🦸‍♂️🦸‍♀️
+            </p>
+        </div>
+    @elseif ($slide === 8)
+        <div class="min-h-screen bg-gradient-to-br from-indigo-50 via-sky-100 to-cyan-200 flex flex-col items-center justify-center py-12">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-indigo-800 mb-8 text-center drop-shadow-lg animate-fade-in">
+                Level Up: Real-World Git Rebase Scenarios
+            </h2>
+
+            <div class="w-full max-w-4xl bg-white/90 rounded-3xl shadow-2xl p-8 mb-10 flex flex-col gap-8">
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold text-cyan-700 mb-2 flex items-center gap-2">
+                        <svg class="size-7 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+                        Scenario 1: Feature Branch Gone Stale
+                    </h3>
+                    <p class="text-cyan-900 text-lg mb-2">
+                        Your feature branch is weeks behind <span class="font-mono bg-cyan-100 px-1 rounded">main</span>. Instead of merging, rebase to keep your history clean and avoid merge commits!
+                    </p>
+                    <code class="block bg-gray-900 text-cyan-200 rounded-lg px-4 py-3 text-base font-mono mb-2 w-full text-left overflow-x-auto">
+                        git fetch origin<br>
+                        git checkout feature-branch<br>
+                        git rebase origin/main
+                    </code>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row-reverse gap-8 items-center">
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold text-indigo-700 mb-2 flex items-center gap-2">
+                        <svg class="size-7 text-cyan-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+                        Scenario 2: Squash Before You Share
+                    </h3>
+                    <p class="text-indigo-900 text-lg mb-2">
+                        Clean up your commit history before opening a PR. Squash those "fix typo" and "wip" commits into meaningful ones!
+                    </p>
+                    <code class="block bg-gray-900 text-indigo-200 rounded-lg px-4 py-3 text-base font-mono mb-2 w-full text-left overflow-x-auto">
+                        git rebase -i HEAD~5
+                    </code>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="flex-1">
+                <h3 class="text-2xl font-bold text-sky-700 mb-2 flex items-center gap-2">
+                    <svg class="size-7 text-cyan-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 12H8m4-4v8"/></svg>
+                    Scenario 3: Oops! Fixup & Autosquash
+                </h3>
+                <p class="text-sky-900 text-lg mb-2">
+                    Forgot to add something to an old commit? Use <span class="font-mono bg-sky-100 px-1 rounded">--fixup</span> and <span class="font-mono bg-sky-100 px-1 rounded">--autosquash</span> for a quick, clean fix!
+                </p>
+                <code class="block bg-gray-900 text-sky-200 rounded-lg px-4 py-3 text-base font-mono mb-2 w-full text-left overflow-x-auto">
+                    git commit --fixup &lt;commit-hash&gt;<br>
+                    git rebase -i --autosquash HEAD~5
+                </code>
+                </div>
+            </div>
+            </div>
+
+            <div class="w-full max-w-2xl bg-gradient-to-r from-cyan-100 via-indigo-100 to-sky-100 rounded-2xl shadow-xl p-6 mb-8 flex flex-col items-center border-2 border-dashed border-cyan-300">
+                <h3 class="text-xl font-bold text-indigo-700 mb-2 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-cyan-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M12 4v16m0 0H3"></path></svg>
+                    Takeaway
+                </h3>
+                <p class="text-indigo-900 text-lg text-center">
+                    <span class="font-bold text-cyan-700">Rebase</span> isn't just a command—it's a superpower for clean, readable, and professional Git history.<br>
+                    <span class="italic text-sky-700">Practice these scenarios and you'll never fear rebasing again!</span>
+                </p>
+            </div>
+
+            <p class="text-xl md:text-2xl text-cyan-800 text-center max-w-2xl mt-4 font-bold animate-pulse">
+                <span class="font-bold text-indigo-700">Ready to rebase like a pro?</span> Try these in your next Laravel project!
+            </p>
+
+            <div class="mt-10 w-full max-w-xl bg-white/80 rounded-xl shadow-lg p-6 flex flex-col items-center">
+                <h3 class="text-xl font-bold text-indigo-700 mb-4 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-cyan-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M12 4v16m0 0H3"></path></svg>
+                    Should I do the live coding?
+                </h3>
+                <p class="text-indigo-900 text-lg text-center">
+                    If you're ready, let's jump into a live coding demo and see these commands in action!
+                </p>
+            </div>
+        </div>
+    @elseif ($slide === 9)
+        <div class="min-h-screen bg-gradient-to-br from-blue-50 via-fuchsia-100 to-yellow-100 flex flex-col items-center justify-center py-12">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-blue-900 mb-8 text-center drop-shadow-lg animate-fade-in">
+                Thank You! 🚀
+            </h2>
+            <img
+                src="{{ asset('images/utsav.png') }}"
+                alt="Utsav Somaiya"
+                class="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover border-8 border-blue-400 shadow-xl mb-8"
+            >
+            <p class="text-2xl md:text-3xl text-blue-800 font-semibold mb-6 text-center max-w-2xl">
+                Questions? Ideas? Want to connect?
+            </p>
+            <a
+                href="https://utsav-somaiya.vercel.app"
+                target="_blank"
+                class="text-lg md:text-2xl text-blue-600 underline mb-4 text-center block"
+            >
+                utsav-somaiya.vercel.app
+            </a>
+            <div class="flex flex-col md:flex-row gap-6 items-center mb-8">
+                <a href="https://twitter.com/SomaiyaUtsav" target="_blank" class="text-blue-500 hover:text-blue-700 text-xl flex items-center gap-2">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.47.69a4.3 4.3 0 0 0 1.88-2.37 8.59 8.59 0 0 1-2.72 1.04A4.28 4.28 0 0 0 16.11 4c-2.37 0-4.29 1.92-4.29 4.29 0 .34.04.67.11.99C7.69 9.13 4.07 7.38 1.64 4.7c-.37.64-.58 1.38-.58 2.17 0 1.5.76 2.82 1.92 3.6a4.28 4.28 0 0 1-1.94-.54v.05c0 2.1 1.5 3.85 3.5 4.25-.36.1-.74.16-1.13.16-.28 0-.54-.03-.8-.08.54 1.7 2.1 2.94 3.95 2.97A8.6 8.6 0 0 1 2 19.54c-.29 0-.57-.02-.85-.05A12.13 12.13 0 0 0 8.29 21.5c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.36-.02-.54A8.36 8.36 0 0 0 24 4.59a8.5 8.5 0 0 1-2.54.7z"/></svg>
+                    @SomaiyaUtsav
+                </a>
+                <a href="mailto:utsav.infyno@gmail.com" class="text-blue-500 hover:text-blue-700 text-xl flex items-center gap-2">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 0v.01L12 13l8-8.99V4H4zm16 2.41l-7.29 7.3a1 1 0 0 1-1.42 0L4 6.41V20h16V6.41z"/></svg>
+                    utsav.infyno@gmail.com
+                </a>
+            </div>
+            <p class="text-lg md:text-xl text-blue-700 text-center mb-4">
+                Slides &amp; resources: <span class="font-mono bg-blue-100 px-2 py-1 rounded">github.com/utsavsomaiya/laravel-ahmedabad</span>
+            </p>
+            <p class="text-xl md:text-2xl text-blue-900 text-center font-bold mt-6">
+                Happy Rebasing! 🎉
+            </p>
+        </div>
     @endif
 </div>

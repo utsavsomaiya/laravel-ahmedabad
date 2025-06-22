@@ -10,6 +10,6 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-code {
+code, pre {
     font-family: 'Dank Mono';
 }
