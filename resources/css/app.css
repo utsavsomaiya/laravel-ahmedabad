@@ -11,5 +11,5 @@
 }
 
 code, pre {
-    font-family: 'Dank Mono';
+    font-family: 'Dank Mono', 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
 }
