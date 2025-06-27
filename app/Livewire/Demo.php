@@ -31,8 +31,6 @@ class Demo extends Component
 
             return;
         }
-
-        dd('હવે બસ, વધુ સ્લાઈડ નથી! ચા પી ને આરામ કર 😊');
     }
 
     public function prev(): void

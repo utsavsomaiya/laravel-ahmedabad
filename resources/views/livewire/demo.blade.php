@@ -4,6 +4,21 @@
     wire:keydown.page-up.prevent.document="prev"
     wire:keydown.page-down.prevent.document="next"
 >
+    <div
+        x-data="fullscreen"
+        class="absolute top-4 right-4 z-50"
+    >
+        <button
+            type="button"
+            x-on:click="toggleFullScreen"
+            class="bg-white/80 hover:bg-blue-200 text-blue-800 font-bold py-2 px-4 rounded-full shadow-lg border border-blue-300 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center gap-2"
+            title="Toggle Full Screen"
+        >
+            <svg id="fullscreen-icon" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path id="fullscreen-enter" d="M4 4h6M4 4v6M20 4h-6M20 4v6M4 20h6M4 20v-6M20 20h-6M20 20v-6" />
+            </svg>
+        </button>
+    </div>
     @if ($slide === 1)
         <div class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-200 flex flex-col items-center justify-center py-12">
             <img
@@ -420,29 +435,77 @@ fi
             <p class="text-2xl md:text-3xl text-blue-800 font-semibold mb-6 text-center max-w-2xl">
                 Questions? Ideas? Want to connect?
             </p>
-            <a
-                href="https://utsav-somaiya.vercel.app"
-                target="_blank"
-                class="text-lg md:text-2xl text-blue-600 underline mb-4 text-center block"
-            >
-                utsav-somaiya.vercel.app
-            </a>
             <div class="flex flex-col md:flex-row gap-6 items-center mb-8">
-                <a href="https://twitter.com/SomaiyaUtsav" target="_blank" class="text-blue-500 hover:text-blue-700 text-xl flex items-center gap-2">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.47.69a4.3 4.3 0 0 0 1.88-2.37 8.59 8.59 0 0 1-2.72 1.04A4.28 4.28 0 0 0 16.11 4c-2.37 0-4.29 1.92-4.29 4.29 0 .34.04.67.11.99C7.69 9.13 4.07 7.38 1.64 4.7c-.37.64-.58 1.38-.58 2.17 0 1.5.76 2.82 1.92 3.6a4.28 4.28 0 0 1-1.94-.54v.05c0 2.1 1.5 3.85 3.5 4.25-.36.1-.74.16-1.13.16-.28 0-.54-.03-.8-.08.54 1.7 2.1 2.94 3.95 2.97A8.6 8.6 0 0 1 2 19.54c-.29 0-.57-.02-.85-.05A12.13 12.13 0 0 0 8.29 21.5c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.36-.02-.54A8.36 8.36 0 0 0 24 4.59a8.5 8.5 0 0 1-2.54.7z"/></svg>
-                    @SomaiyaUtsav
-                </a>
-                <a href="mailto:utsav.infyno@gmail.com" class="text-blue-500 hover:text-blue-700 text-xl flex items-center gap-2">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 0v.01L12 13l8-8.99V4H4zm16 2.41l-7.29 7.3a1 1 0 0 1-1.42 0L4 6.41V20h16V6.41z"/></svg>
-                    utsav.infyno@gmail.com
-                </a>
+            <a href="https://twitter.com/SomaiyaUtsav" target="_blank" class="text-blue-500 hover:text-blue-700 text-xl flex items-center gap-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.47.69a4.3 4.3 0 0 0 1.88-2.37 8.59 8.59 0 0 1-2.72 1.04A4.28 4.28 0 0 0 16.11 4c-2.37 0-4.29 1.92-4.29 4.29 0 .34.04.67.11.99C7.69 9.13 4.07 7.38 1.64 4.7c-.37.64-.58 1.38-.58 2.17 0 1.5.76 2.82 1.92 3.6a4.28 4.28 0 0 1-1.94-.54v.05c0 2.1 1.5 3.85 3.5 4.25-.36.1-.74.16-1.13.16-.28 0-.54-.03-.8-.08.54 1.7 2.1 2.94 3.95 2.97A8.6 8.6 0 0 1 2 19.54c-.29 0-.57-.02-.85-.05A12.13 12.13 0 0 0 8.29 21.5c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.36-.02-.54A8.36 8.36 0 0 0 24 4.59a8.5 8.5 0 0 1-2.54.7z"/></svg>
+                @SomaiyaUtsav
+            </a>
+            <a href="mailto:utsav.infyno@gmail.com" class="text-blue-500 hover:text-blue-700 text-xl flex items-center gap-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 0v.01L12 13l8-8.99V4H4zm16 2.41l-7.29 7.3a1 1 0 0 1-1.42 0L4 6.41V20h16V6.41z"/></svg>
+                utsav.infyno@gmail.com
+            </a>
             </div>
-            <p class="text-lg md:text-xl text-blue-700 text-center mb-4">
-                Slides &amp; resources: <span class="font-mono bg-blue-100 px-2 py-1 rounded">github.com/utsavsomaiya/laravel-ahmedabad</span>
+            <div class="flex flex-col items-center mb-4">
+            <p class="text-lg md:text-xl text-blue-700 text-center mb-2">
+                Slides &amp; resources:
             </p>
+            <img
+                src="{{ asset('images/qr-code.jpeg') }}"
+                alt="QR code for slides and resources"
+                class="w-36 h-36 md:w-44 md:h-44 rounded-lg border-4 border-blue-200 shadow-lg mb-2"
+            >
+            </div>
             <p class="text-xl md:text-2xl text-blue-900 text-center font-bold mt-6">
                 Happy Rebasing! 🎉
             </p>
         </div>
     @endif
 </div>
+
+@script
+    <script>
+        Alpine.data('fullscreen', () => {
+            return {
+                toggleFullScreen() {
+                    const doc = document.documentElement
+                    if (
+                        !document.fullscreenElement &&
+                        !document.webkitFullscreenElement &&
+                        !document.mozFullScreenElement &&
+                        !document.msFullscreenElement
+                    ) {
+                        switch (true) {
+                            case !!doc.requestFullscreen:
+                                doc.requestFullscreen()
+                                break
+                            case !!doc.webkitRequestFullscreen:
+                                doc.webkitRequestFullscreen()
+                                break
+                            case !!doc.mozRequestFullScreen:
+                                doc.mozRequestFullScreen()
+                                break
+                            case !!doc.msRequestFullscreen:
+                                doc.msRequestFullscreen()
+                                break
+                        }
+                    } else {
+                        switch (true) {
+                            case !!document.exitFullscreen:
+                                document.exitFullscreen()
+                                break
+                            case !!document.webkitExitFullscreen:
+                                document.webkitExitFullscreen()
+                                break
+                            case !!document.mozCancelFullScreen:
+                                document.mozCancelFullScreen()
+                                break
+                            case !!document.msExitFullscreen:
+                                document.msExitFullscreen()
+                                break
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+@endscript
