@@ -126,6 +126,49 @@
             </div>
         </div>
     @elseif ($slide === 4)
+        <div class="min-h-screen bg-gradient-to-br from-orange-50 to-orange-200 flex flex-col items-center justify-center py-12">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-orange-900 mb-8 text-center drop-shadow-lg">
+                What Actually Happens: Rebase vs Merge
+            </h2>
+
+            <div class="flex flex-col md:flex-row gap-10 w-full max-w-5xl mb-10">
+                <div class="bg-white/90 rounded-2xl shadow-xl p-8 flex-1 border-2 border-orange-200 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold text-orange-700 mb-4 flex items-center gap-2">
+                        <svg class="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+                        Merge: The Classic Way
+                    </h3>
+                    <ul class="list-disc list-inside text-orange-900 text-lg space-y-3 text-left mb-4">
+                        <li>Git finds the common ancestor of both branches.</li>
+                        <li>It creates a new <span class="font-bold">merge commit</span> that combines the changes from both branches.</li>
+                        <li>All commits from both branches are preserved, including the "merge commit".</li>
+                        <li>History can become tangled, especially with many merges.</li>
+                    </ul>
+                    <p class="text-orange-700 text-base text-center">
+                        <span class="font-bold">Result:</span> All changes are combined, but the commit history can look messy.
+                    </p>
+                </div>
+                <div class="bg-white/90 rounded-2xl shadow-xl p-8 flex-1 border-2 border-orange-200 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold text-orange-700 mb-4 flex items-center gap-2">
+                        <svg class="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 12H8m4-4v8"/></svg>
+                        Rebase: The Clean Way
+                    </h3>
+                    <ul class="list-disc list-inside text-orange-900 text-lg space-y-3 text-left mb-4">
+                        <li>Git finds the common ancestor of both branches.</li>
+                        <li>It <span class="font-bold">removes</span> your branch's commits temporarily.</li>
+                        <li>It <span class="font-bold">reapplies</span> your commits one by one on top of the latest main branch.</li>
+                        <li>No merge commit is created—history is linear and clean.</li>
+                    </ul>
+                    <p class="text-orange-700 text-base text-center">
+                        <span class="font-bold">Result:</span> Your changes appear as if they were made after the latest main branch commits—super clean history!
+                    </p>
+                </div>
+            </div>
+
+            <p class="text-xl md:text-2xl text-orange-800 text-center max-w-2xl mt-4">
+                <span class="font-bold text-orange-700">Summary:</span> <span class="font-mono bg-orange-100 px-2 py-1 rounded">merge</span> preserves all history (including merges), while <span class="font-mono bg-orange-100 px-2 py-1 rounded">rebase</span> rewrites history for clarity.
+            </p>
+        </div>
+    @elseif ($slide === 5)
         <div class="min-h-screen bg-gradient-to-br from-yellow-50 to-yellow-200 flex flex-col items-center justify-center py-12">
             <h2 class="text-4xl md:text-6xl font-extrabold text-yellow-900 mb-8 text-center drop-shadow-lg">
                 Rebase vs Merge: The Commands
@@ -164,7 +207,7 @@
                 <span class="font-bold text-yellow-700">Tip:</span> Use <code class="bg-gray-200 px-2 py-1 rounded font-mono text-base">merge</code> for preserving history, <code class="bg-gray-200 px-2 py-1 rounded font-mono text-base">rebase</code> for a clean, linear commit log!
             </p>
         </div>
-    @elseif ($slide === 5)
+    @elseif ($slide === 6)
         <div class="min-h-screen bg-gradient-to-br from-pink-50 to-pink-200 flex flex-col items-center justify-center py-12">
             <h2 class="text-4xl md:text-6xl font-extrabold text-pink-900 mb-8 text-center drop-shadow-lg">
                 Pro Level: Advanced Rebase Commands & Tips
@@ -249,7 +292,7 @@
                 </p>
             </div>
         </div>
-    @elseif ($slide === 6)
+    @elseif ($slide === 7)
         <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex flex-col items-center justify-center py-12">
             <h2 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-8 text-center drop-shadow-lg">
                 Supercharge Your Workflow: Git Aliases
@@ -292,7 +335,7 @@
                 <span class="font-bold text-gray-700">Pro Tip:</span> Aliases save time and reduce mistakes. Make your git workflow lightning fast!
             </p>
         </div>
-    @elseif ($slide === 7)
+    @elseif ($slide === 8)
         <div class="min-h-screen bg-gradient-to-br from-fuchsia-100 via-sky-100 to-lime-200 flex flex-col items-center justify-center py-12">
             <h2 class="text-4xl md:text-6xl font-extrabold text-fuchsia-700 mb-8 text-center drop-shadow-lg">
                 Git Hooks That Save Your Bacon (and Your Repo)
@@ -341,7 +384,7 @@ fi
                 <span class="italic text-lime-700">Be a Git Hero, not a Git Horror Story!</span> 🦸‍♂️🦸‍♀️
             </p>
         </div>
-    @elseif ($slide === 8)
+    @elseif ($slide === 9)
         <div class="min-h-screen bg-gradient-to-br from-indigo-50 via-sky-100 to-cyan-200 flex flex-col items-center justify-center py-12">
             <h2 class="text-4xl md:text-6xl font-extrabold text-indigo-800 mb-8 text-center drop-shadow-lg animate-fade-in">
                 Level Up: Real-World Git Rebase Scenarios
@@ -422,7 +465,46 @@ fi
                 </p>
             </div>
         </div>
-    @elseif ($slide === 9)
+    @elseif ($slide === 10)
+        <div class="min-h-screen bg-gradient-to-br from-amber-50 via-fuchsia-50 to-sky-100 flex flex-col items-center justify-center py-12">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-amber-900 mb-8 text-center drop-shadow-lg animate-fade-in">
+                Special Thanks: Laravel Ahmedabad Community ❤️
+            </h2>
+            <div class="flex flex-col md:flex-row gap-8 items-center mb-8">
+                <div class="flex flex-col items-center">
+                    <img
+                        src="{{ asset('images/bhavdip.jpg') }}"
+                        alt="Bhavdip"
+                        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-amber-400 shadow-lg mb-4"
+                    >
+                    <p class="text-xl md:text-2xl font-bold text-amber-800 text-center">Bhavdip Pambhar</p>
+                    <p class="text-base text-amber-700 text-center">Community Lead</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img
+                        src="{{ asset('images/punyapal.jpg') }}"
+                        alt="Punyapal"
+                        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-fuchsia-400 shadow-lg mb-4"
+                    >
+                    <p class="text-xl md:text-2xl font-bold text-fuchsia-800 text-center">Punyapal Shah</p>
+                    <p class="text-base text-fuchsia-700 text-center">Co-Organizer</p>
+                </div>
+            </div>
+            <p class="text-xl md:text-2xl text-sky-900 font-semibold text-center mb-8 max-w-2xl">
+                Huge thanks to Bhavdip, Punyapal, and every member of the Laravel Ahmedabad community for making this event possible and for your amazing support!
+            </p>
+            <div class="flex flex-col items-center">
+                <img
+                    src="{{ asset('images/community.jpeg') }}"
+                    alt="Laravel Ahmedabad Community Group Photo"
+                    class="w-full max-w-2xl h-64 md:h-96 object-cover rounded-2xl border-4 border-sky-200 shadow-2xl mb-4"
+                >
+                <p class="text-lg md:text-xl text-sky-800 text-center font-medium">
+                    Thank you, Laravel Ahmedabad Community! 🚀
+                </p>
+            </div>
+        </div>
+    @elseif ($slide === 11)
         <div class="min-h-screen bg-gradient-to-br from-blue-50 via-fuchsia-100 to-yellow-100 flex flex-col items-center justify-center py-12">
             <h2 class="text-4xl md:text-6xl font-extrabold text-blue-900 mb-8 text-center drop-shadow-lg animate-fade-in">
                 Thank You! 🚀

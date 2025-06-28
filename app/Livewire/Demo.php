@@ -15,17 +15,19 @@ class Demo extends Component
         'Hey there! Introduction',
         'Quick Poll!',
         'What you will learn?',
+        'What actually happen?',
         'Rebase v/s Merge',
         '`git rebase --abort`',
         'Git aliases',
         'Hooks 🪝',
         'Scenarios',
+        'Thanks to community',
         'Thank you!',
     ];
 
     public function next(): void
     {
-        if ($this->slide !== 9) {
+        if ($this->slide !== 11) {
             $this->slide++;
             $this->dispatch('update-title', title: $this->titles[$this->slide - 1] ?? 'Oops!');
 
