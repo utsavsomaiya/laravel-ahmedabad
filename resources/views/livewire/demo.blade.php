@@ -470,28 +470,8 @@ fi
             <h2 class="text-4xl md:text-6xl font-extrabold text-amber-900 mb-8 text-center drop-shadow-lg animate-fade-in">
                 Special Thanks: Laravel Ahmedabad Community ❤️
             </h2>
-            <div class="flex flex-col md:flex-row gap-8 items-center mb-8">
-                <div class="flex flex-col items-center">
-                    <img
-                        src="{{ asset('images/bhavdip.jpg') }}"
-                        alt="Bhavdip"
-                        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-amber-400 shadow-lg mb-4"
-                    >
-                    <p class="text-xl md:text-2xl font-bold text-amber-800 text-center">Bhavdip Pambhar</p>
-                    <p class="text-base text-amber-700 text-center">Community Lead</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img
-                        src="{{ asset('images/punyapal.jpg') }}"
-                        alt="Punyapal"
-                        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-fuchsia-400 shadow-lg mb-4"
-                    >
-                    <p class="text-xl md:text-2xl font-bold text-fuchsia-800 text-center">Punyapal Shah</p>
-                    <p class="text-base text-fuchsia-700 text-center">Co-Organizer</p>
-                </div>
-            </div>
             <p class="text-xl md:text-2xl text-sky-900 font-semibold text-center mb-8 max-w-2xl">
-                Huge thanks to Bhavdip, Punyapal, and every member of the Laravel Ahmedabad community for making this event possible and for your amazing support!
+                Huge thanks to Chirag, Punyapal, Prem, Vinay, Ruchit, Bhavdip and every member of the Laravel Ahmedabad community for making this event possible and for your amazing support!
             </p>
             <div class="flex flex-col items-center">
                 <img
